@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title th:text="${titulo}">Pagina de Pruebas</title>
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+<link rel="stylesheet" th:href="@{/css/jquery-ui.min.css}" />
+<link rel="stylesheet" th:href="@{/css/myStyle.css}" />
+</head>
+<body>
+
+
+	<div th:fragment="agregarAlergenos" class="container">
+		<br />
+		<form th:action="@{/admin/alergeno/add}" th:object="${alergeno}"
+			method="post" class="form-group" enctype="multipart/form-data">
+			<input type="hidden" th:field="*{id}" />
+			<div class="container">
+				<div class="row">
+					<label class="col-md-1">Nombre </label> <span class="col-md-3">
+						<input type="text" th:field="*{nombre}" />
+					</span> <label for="file" class="col-md-1">Foto</label>
+					<div class="col-md-4">
+						<input type="file" name="file" class="form-control" />
+					</div>
+					<span class="col-md-2"><input class="btn btn-primary"
+						type="submit" value="Agregar" /></span>
+				</div>
+				<div class="row"></div>
+			</div>
+		</form>
+	</div>
+	<div th:fragment="mostrarAlergenos" class="container py-4">
+		<div class="alert alert-info my-4"
+			th:if="${#lists.isEmpty(alergenos)}"
+			th:text="'No hay alergenos insertados'">
+		</div>
+		<div th:if="${not #lists.isEmpty(alergenos)}">
+		<table class="table">
+			<thead>
+				<tr>
+					<th scope="col">Id</th>
+					<th scope="col">Nombre</th>
+					<th scope="col">imagen</th>
+					<th scope="col"></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="alergeno: ${alergenos}">
+					<td th:text="${alergeno.id}"></td>
+					<td th:text="${alergeno.nombre}"></td>
+					<td><a th:href="@{'/admin/producto/alergeno/'+${alergeno.id}}">
+							<img class="img-thumbnail rounded float-left alergeno"
+							th:src="@{${alergeno.foto}}" th:alt="${alergeno.foto}" />
+					</a></td>
+					<td>
+						<form th:action="@{/admin/alergeno/delete}" method="post"
+							class="form-group">
+							<input type="hidden" th:value="${alergeno.id}" name="id" /> <input
+								type="submit" th:value="X" class="btn btn-primary btn-sm"
+								onclick="return confirm('Estas seguro que quieres eliminar?');" />
+						</form>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		</div>
+	</div>
+</body>
+</html>

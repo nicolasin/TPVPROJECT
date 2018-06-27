@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+<link rel="stylesheet" th:href="@{/css/jquery-ui.min.css}" />
+<link rel="stylesheet" th:href="@{/css/myStyle.css}" />
+</head>
+<body>
+	<div th:fragment="buscarComponentes">
+		<br />
+		<form th:action="@{/admin/componente/buscar}" method="post"
+			class="form-group" enctype="multipart/form-data">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-4">
+						<label for="formNameSearhc">Nombre: </label> <input th:value="''"
+							type="text" class="form-control" id="formNameSearhc"
+							name="nombre" />
+					</div>
+					<div class="col-md-4">
+						<label for="formAlergenoSelect">Alergeno: </label> <select
+							class="form-control" id="eformAlergenoSelect" name="id">
+							<option th:value="0" th:text="'Todos'"></option>
+							<option th:each="alergeno: ${alergenos}"
+								th:value="${alergeno.id}" th:text="${alergeno.nombre}" />
+						</select>
+					</div>
+					<div class="col-md-2">
+						<br />
+						<button type="submit" class="btn btn-primary" th:text="Buscar"></button>
+					</div>
+					<div class="col-md-2">
+						<br /> <a th:href="@{/admin/componente/add}"
+							class="btn btn-primary" th:text=" '+' "></a>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+	<div th:fragment="mostrarComponentes" class="container">
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Nombre</th>
+					<th>Alergenos</th>
+					<th>Stock</th>
+					<th></th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="componente: ${componentes}">
+					<td th:text="${componente.id}"></td>
+					<td th:text="${componente.nombre}"></td>
+					<td><span th:each="alergeno: ${componente.getAlergenos()}"><a
+							th:href="@{'/admin/producto/alergeno/'+${alergeno.id}}"> <img
+								th:src="@{${alergeno.foto}}"></img></a></span></td>
+					<td th:text="${componente.stock}"></td>
+					<td><form th:action="@{/admin/componente/alter}" method="post"
+							class="form-group" enctype="multipart/form-data">
+							<input type="hidden" th:name="id" th:value="${componente.id}" />
+							<button type="submit" class="btn btn-primary btn-xs">Modificar</button>
+						</form></td>
+					<td><form th:action="@{/admin/componente/delete}" method="post"
+							class="form-group" enctype="multipart/form-data">
+							<input type="hidden" th:name="id" th:value="${componente.id}" />
+							<button type="submit" class="btn btn-primary btn-xs" onclick="return confirm('¿Estas seguro que quieres eliminar?');">Eliminar</button>
+						</form></td>
+				</tr>
+			</tbody>
+		</table>
+
+
+
+	</div>
+	<div th:fragment="FormularioInsertarComponente">
+
+		<br />
+		<form th:action="@{/admin/componente/save}" method="post"
+			class="form-group container" th:object="${componente}"
+			enctype="multipart/form-data">
+			<input type="hidden" th:field="*{id}" />
+			<div class="row">
+				<label class="col-md-2" for="nombreForm" th:text="'Nombre: '"></label>
+				<input class="form-control col-md-6" type="text" name="nombre"
+					th:field="*{nombre}" id="nombreForm" /> <label class="col-md-1"
+					for="stockForm" th:text="'Stock:'"></label> <input
+					class="form-control col-md-3" th:field="*{stock}" type="Number"
+					th:value="${componente.stock}" name="stock" id="stockForm" />
+			</div>
+			<div class="row">
+				<label class="col-md-2" th:text="'Alergeno:'"></label>
+			</div>
+			<div class="row">
+				<input type="hidden" th:name="alergenosCheck" th:value="0" /> <span
+					class="col-md-1" th:each="alergeno: ${alergenos}"> <img
+					th:src="@{${alergeno.foto}}"></img> <input type="checkbox"
+					th:name="'alergenosCheck'" th:value="${alergeno.id}" />
+				</span>
+			</div>
+			<div class="row">
+				<br />
+			</div>
+			<div class="row">
+				<button class="col-md-2 btn btn-primary btn-sm" th:text="Agregar"
+					type="submit"></button>
+			</div>
+
+
+		</form>
+	</div>
+</body>
+</html>

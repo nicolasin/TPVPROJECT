@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title th:text="${titulo}">A</title>
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+<link rel="stylesheet" th:href="@{/css/jquery-ui.min.css}" />
+<link rel="stylesheet" th:href="@{/css/myStyle.css}" />
+</head>
+<body>
+	<header th:replace="layouts/menu :: menuAdmin"></header>
+
+	<div class="panel-group">
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<div th:replace="layouts/categorias_layouts:: agregarCategorias"></div>
+				<div th:replace="layouts/categorias_layouts:: mostrarCategorias"></div>
+			</div>
+		</div>
+	</div>
+	<footer th:replace="layouts/footers:: footerAdmin"></footer>
+</body>
+</html>

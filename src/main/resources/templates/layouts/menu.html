@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<title>Insert title here</title>
+</head>
+<body>
+	<header th:fragment="menuAdmin" class="page-header">
+		<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+			<a class="navbar-brand" th:href="@{/admin}">AdminPanel</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse">
+				<ul class="nav">
+					<li class="nav-item "><a class="nav-link "
+						th:href="@{'/admin/alergeno'}">Alergeno</a></li>
+					<li class="nav-item"><a class="nav-link"
+						th:href="@{'/admin/componente'}">Componente</a></li>
+					<li class="nav-item"><a class="nav-link"
+						th:href="@{'/admin/categoria'}">Categoria</a></li>
+
+					<li class="nav-item"><a class="nav-link"
+						th:href="@{'/admin/producto'}">Producto</a></li>
+					<li class="nav-item"><a class="nav-link"
+						th:href="@{'/admin/producto'}">Pedidos</a></li>
+					<li class="nav-item"><a class="nav-link"
+						th:href="@{'/admin/producto'}">Mesa</a></li>
+					<li class="nav-item"><a class="nav-link"
+						th:href="@{'/admin/producto'}">Descuentos</a></li>
+					<li class="nav-item"><a class="nav-link"
+						th:href="@{'/admin/producto'}">Tipos de Pago</a></li>
+
+				</ul>
+			</div>
+
+		</nav>
+		<div class="alert alert-success" th:if="${success != null}" th:text="${success}"></div>
+		<div class="alert alert-danger" th:if="${error != null}" th:text="${error}"></div>
+		<div class="alert alert-warning" th:if="${warning != null}" th:text="${warning}"></div>
+		<div class="alert alert-info" th:if="${info != null}" th:text="${info}"></div>
+	</header>
+</body>
+</html>

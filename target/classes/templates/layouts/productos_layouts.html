@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title th:text="${titulo}">Pagina de Pruebas</title>
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+<link rel="stylesheet" th:href="@{/css/jquery-ui.min.css}" />
+<link rel="stylesheet" th:href="@{/css/myStyle.css}" />
+</head>
+<body>
+
+
+	<div th:fragment="mostrarProductos" class="container py-4">
+		<div th:if="${not #lists.isEmpty(productos)}">
+			<button type="button" class="btn btn-primary btn-xm">Agregar
+				Producto</button>
+			<table class="table">
+				<thead>
+					<tr>
+						<th scope="col">Id</th>
+						<th scope="col">Nombre</th>
+						<th scope="col">Precio</th>
+						<th scope="col">Categorias</th>
+						<th scope="col">Alergenos</th>
+						<th scope="col"></th>
+						<th scope="col"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="producto: ${productos}">
+						<td><a class="btn btn-default btn-xs"
+							th:href="@{'/admin/producto/'+${producto.id}}"
+							th:text="${producto.id}"> </a></td>
+						<td th:text="${producto.nombre}"></td>
+						<td th:text="${producto.precio}+'&euro;'"></td>
+						<td><span th:each="categoria: ${producto.categorias}">
+								<a th:href="@{'/admin/producto/categoria/'+${categoria.id}}">
+								<img th:src="@{${categoria.foto}}"></img></a>
+						</span></td>
+						<td><span
+							th:each="alergeno: ${producto.getAlergenosFromProducto()}">
+								
+								<a th:href="@{'/admin/producto/alergeno/'+${alergeno.id}}">
+									<img th:src="@{${alergeno.foto}}"></img>
+								</a>
+						</span></td>
+						<td><button type="button" class="btn btn-primary btn-xs">Modificar</button></td>
+						<td><button type="button" class="btn btn-primary btn-xs">Eliminar</button></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div th:fragment="mostrarProductoID" class="container py-4">
+		<div th:if="${not #lists.isEmpty(producto)}">
+
+			<h2>
+				<span th:text="'Producto:' + ' ' + ${producto.nombre}"></span>
+			</h2>
+			<div>
+				<label>Precio: </label> <span th:text="${producto.precio}"></span>
+			</div>
+			<div>
+				<label>Alergenos: </label> <span
+					th:each="alergeno :${producto.getAlergenosFromProducto()}">
+					<img th:src="@{${alergeno.foto}}"></img>
+				</span>
+			</div>
+			<div>
+				<label>Categorias: </label> <span
+					th:each="categoria: ${producto.categorias}"> <img
+					th:src="@{${categoria.foto}}"></img>
+				</span>
+			</div>
+			<div>
+				<label>Componentes: </label> <span
+					th:each="componente : ${producto.getComponentes()}"> <span
+					th:text="${componente.nombre}"></span>
+				</span>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

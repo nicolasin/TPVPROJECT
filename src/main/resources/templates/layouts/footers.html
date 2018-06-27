@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title th:text="${titulo}">Pagina de Pruebas</title>
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+<link rel="stylesheet" th:href="@{/css/jquery-ui.min.css}" />
+<link rel="stylesheet" th:href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"/>
+<link rel="stylesheet" th:href="@{/css/myStyle.css}" />
+</head>
+<body>
+
+
+	<footer th:fragment="footerAdmin"
+		class="page-footer font-small stylish-color-dark pt-4 mt-4">
+		<div style="background-color: #81BEF7;">
+			<div class="container">
+
+				<!-- Grid row-->
+				<div class="row py-4 d-flex align-items-center">
+
+					<!-- Grid column -->
+					<div
+						class="col-md-6 col-lg-5 text-center text-md-left mb-4 mb-md-0">
+						<h6 class="mb-0" style="color: white;">Get connected with us
+							on social networks!</h6>
+					</div>
+
+					<div class="col-md-6 col-lg-7 text-center text-md-right">
+
+						<a class="ins-ic"> <i class="fa fa-female"></i>
+						</a>
+						<h6 class="mb-0" style="color: white;">Telegram</h6>
+
+					</div>
+					<!-- Grid column -->
+
+				</div>
+				<!-- Grid row-->
+
+			</div>
+		</div>
+
+	</footer>
+</body>
+</html>
