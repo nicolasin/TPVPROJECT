@@ -21,10 +21,10 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 
-import es.nicolas.uca.tpv.dao.AlergenoDAO;
-import es.nicolas.uca.tpv.dao.CategoriaDAO;
-import es.nicolas.uca.tpv.dao.ComponenteDAO;
-import es.nicolas.uca.tpv.dao.ProductoDAO;
+import es.nicolas.uca.tpv.Repository.AlergenoDAO;
+import es.nicolas.uca.tpv.Repository.CategoriaDAO;
+import es.nicolas.uca.tpv.Repository.ComponenteDAO;
+import es.nicolas.uca.tpv.Repository.ProductoDAO;
 import es.nicolas.uca.tpv.entity.Alergeno;
 import es.nicolas.uca.tpv.entity.Categoria;
 import es.nicolas.uca.tpv.entity.Componente;
