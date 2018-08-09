@@ -22,7 +22,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	 * @Autowired
 	private LoginSuccessHandler successHandler;
 	*/
-	
 	@Autowired
 	private JpaUserDetailsService userDetailsService;
 	
@@ -35,14 +34,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
-		http.authorizeRequests().antMatchers("/", "/css/**", "/js/**", "/images/**", "/listar**", "/locale").permitAll()
+		http.authorizeRequests().antMatchers("/","/css**", "/js**", "/imagenes**", "/admin**", "/admin/**", "/api**", "/api/alergeno**").permitAll()
 		.anyRequest().authenticated()
 		.and()
 		.addFilter(new JWTAuthenticationFilter(authenticationManager(), jwtService))
 		.addFilter(new JWTAuthorizationFilter(authenticationManager(), jwtService))
 		.csrf().disable()
 		.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-
 	}
 
 	@Autowired

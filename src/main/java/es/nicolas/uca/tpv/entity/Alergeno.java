@@ -16,6 +16,8 @@ import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import es.nicolas.uca.tpv.services.UploadFileServiceImpl;
 import es.nicolas.uca.tpv.services.Interface.IUploadFileService;
 
@@ -23,8 +25,12 @@ import es.nicolas.uca.tpv.services.Interface.IUploadFileService;
 @Table(name = "alergenos")
 public class Alergeno implements Serializable {
 
-	private static final long serialVersionUID = 5829325385918574084L;
 
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7148442811240495379L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
@@ -33,6 +39,8 @@ public class Alergeno implements Serializable {
 	private String nombre;
 	@NotEmpty
 	private String foto;
+	
+	@JsonIgnore
 	@ManyToMany(mappedBy = "alergenos", fetch=FetchType.LAZY)
 	private Set<Componente> componentes = new HashSet<>();
 
@@ -44,7 +52,7 @@ public class Alergeno implements Serializable {
 		this.nombre = nombre;
 		this.foto = foto;
 	}
-
+	
 	public Set<Componente> getComponentes() {
 		return componentes;
 	}
@@ -103,4 +111,6 @@ public class Alergeno implements Serializable {
 	}
 		
 	}
+	
+	
 }
