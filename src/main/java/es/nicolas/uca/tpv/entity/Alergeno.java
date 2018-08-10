@@ -42,21 +42,21 @@ public class Alergeno implements Serializable {
 	
 	@JsonIgnore
 	@ManyToMany(mappedBy = "alergenos", fetch=FetchType.LAZY)
-	private Set<Componente> componentes = new HashSet<>();
+	private Set<Componente> componentes = new HashSet<Componente>();
 
 	public Alergeno() {
 
 	}
 
-	public Alergeno(String nombre, String foto) {
+	public Alergeno(String nombre, String foto) {	
 		this.nombre = nombre;
 		this.foto = foto;
+		this.componentes = new HashSet<Componente>(); 
 	}
 	
 	public Set<Componente> getComponentes() {
 		return componentes;
 	}
-
 	public void setComponentes(Set<Componente> componentes) {
 		this.componentes = componentes;
 	}

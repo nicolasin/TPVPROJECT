@@ -19,6 +19,9 @@ import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "componentes")
 public class Componente implements Serializable {
@@ -35,10 +38,13 @@ public class Componente implements Serializable {
 	@ManyToMany
 	@JoinTable(name = "componentes_alergenos", joinColumns = {
 			@JoinColumn(name = "componente_id") }, inverseJoinColumns = { @JoinColumn(name = "alergenos_id") })
+	@JsonManagedReference
 	private Set<Alergeno> alergenos = new HashSet<>();
 	@Column(name = "stock")
 	private double stock;
+	
 	@OneToMany(mappedBy = "componente", fetch = FetchType.LAZY)
+	@JsonIgnore
 	Set<ComponenteProducto> productos = new HashSet<>();
 
 	public Set<ComponenteProducto> getProductos() {

@@ -16,8 +16,11 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "Productos")
@@ -30,12 +33,16 @@ public class Producto implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@JsonIgnore
 	@NotEmpty
 	private String nombre;
-	@NotEmpty
+	@JsonIgnore
+	@NotNull
 	private double precio;
+	@JsonIgnore
 	@OneToMany(mappedBy = "producto")
 	Set<ComponenteProducto> componentes = new HashSet<>();
+	@JsonIgnore
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "CategoriasProductos", joinColumns = { @JoinColumn(name = "idProducto") }, inverseJoinColumns = {
 			@JoinColumn(name = "idCategoria") })
